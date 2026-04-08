@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Shop - Graphic Design & Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - ปรับโทนสีตามบรีฟลูกค้า: น้ำเงิน ฟ้า ทอง โทนมืดเข้ม */
+        :root {
+            --primary-color: #1a3a5f; /* น้ำเงินเข้ม */
+            --primary-light: #dcedf7; /* ฟ้าอ่อน */
+            --primary-dark: #0d1f33;  /* น้ำเงินมืด */
+            --accent-gold: #d4af37;   /* ทอง */
+            --bg-color: #fdfefe;      
+            --surface-color: #ffffff; 
+            --text-main: #2c3e50;     
+            --text-light: #7f8c8d;    
+            --border-color: #e0e0e0;  
+            --shadow-sm: 0 1px 2px 0 rgba(0,0,0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(26, 58, 95, 0.2);
+            --shadow-lg: 0 20px 40px rgba(13, 31, 51, 0.15);
+            --radius-md: 14px;
+            --radius-lg: 24px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 10px; }
+
+        body, button, input, textarea, select { font-family: 'Alfa Slab One', 'Mitr', sans-serif; }
+        body {
+            background-color: #f0f4f8; 
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 57c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm57-13c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-45-1c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM16 38c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a3a5f' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, .eng-text { font-family: 'Alfa Slab One', cursive; color: var(--primary-dark); font-weight: normal; }
+        .mobile-app { width: 100%; max-width: 440px; background-color: var(--bg-color); min-height: 100vh; position: relative; box-shadow: var(--shadow-lg); overflow-x: hidden; display: flex; flex-direction: column; }
+        
+        /* Sidebar & Menu */
+        .sidebar { width: 100%; height: 100vh; background-color: var(--surface-color); position: fixed; top: 0; left: 0; right: 0; margin: 0 auto; max-width: 440px; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 2rem 0; z-index: 1000; transform: translateX(-100%); transition: transform 0.3s ease; }
+        .sidebar.active { transform: translateX(0); }
+        .menu-toggle { display: flex; position: absolute; top: 1rem; left: 1rem; background: var(--surface-color); border: 2px solid var(--primary-color); color: var(--primary-dark); border-radius: 50%; width: 45px; height: 45px; z-index: 200; cursor: pointer; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        
+        /* บังคับคงไว้: Badges (ปุ่มกลมเล็กด้านบน) */
+        .badges-container { display: flex; gap: 8px; justify-content: center; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .badge-item { width: 35px; height: 35px; border-radius: 50%; background: var(--primary-light); border: 1px solid var(--primary-color); display: flex; align-items: center; justify-content: center; color: var(--primary-dark); font-size: 12px; }
+
+        /* บังคับคงไว้: Status Bar (แถบเช็คคิว) */
+        .status-bar { background: var(--primary-dark); color: white; padding: 10px; text-align: center; font-size: 0.85rem; border-radius: var(--radius-md); margin-bottom: 1rem; }
+        
+        /* บังคับคงไว้: ปุ่มเช็คคิวงานแบบเส้นประ */
+        .btn-dashed { border: 2px dashed var(--accent-gold); background: transparent; color: var(--primary-dark); padding: 10px 20px; border-radius: var(--radius-md); width: 100%; display: block; text-align: center; margin-top: 10px; font-weight: 600; text-decoration: none; transition: 0.3s; }
+        .btn-dashed:hover { background: rgba(212, 175, 55, 0.1); }
+
+        .main-content { width: 100%; padding: 4.5rem 1.25rem 2rem 1.25rem; }
+        section { margin-bottom: 3.5rem; scroll-margin-top: 2rem; }
+        .section-title { font-size: 1.4rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; background: linear-gradient(90deg, var(--primary-light) 0%, transparent 100%); padding: 8px 16px; border-radius: 12px; border-left: 5px solid var(--accent-gold); }
+        .card { background: var(--surface-color); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); margin-bottom: 1.5rem; position: relative; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--primary-dark); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: var(--primary-color); color: white; padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer; transition: 0.2s; }
+        .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content { background: var(--surface-color); width: 90%; max-width: 380px; border-radius: var(--radius-lg); padding: 1.5rem; max-height: 80vh; overflow-y: auto; box-shadow: var(--shadow-lg); position: relative; }
+        
+        .reveal { opacity: 0; transform: translateY(35px); transition: all 0.7s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .icon { width: 20px; height: 20px; fill: currentColor; }
+    </style>
+</head>
+<body>
+    <svg style="display:none;">
+        <symbol id="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+        <symbol id="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+    </svg>
+
+    <div class="mobile-app">
+        <button class="menu-toggle" id="menuToggle"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M4,6H20V8H4V6M4,11H20V13H4V11M4,16H20V18H4V16Z" /></svg></button>
+
+        <aside class="sidebar" id="sidebar">
+            <button style="position:absolute; top:15px; right:15px; border:none; background:none; cursor:pointer;" id="closeSidebar"><svg class="icon"><use href="#icon-close"></use></svg></button>
+            <div style="text-align:center; margin-top:2rem;"><h1 class="eng-text">PAPER SHOP</h1></div>
+            <ul style="list-style:none; padding:1rem;">
+                <li><a href="#welcome" style="display:block; padding:12px; text-decoration:none; color:var(--text-main);">Home</a></li>
+                <li><a href="#portfolio" style="display:block; padding:12px; text-decoration:none; color:var(--text-main);">Portfolio</a></li>
+                <li><a href="#rules" style="display:block; padding:12px; text-decoration:none; color:var(--text-main);">Terms & Rules</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="badges-container">
+                <div class="badge-item">P</div>
+                <div class="badge-item">A</div>
+                <div class="badge-item">P</div>
+                <div class="badge-item">E</div>
+                <div class="badge-item">R</div>
+            </div>
+
+            <div class="status-bar">
+                ✨ เปิดรับออเดอร์ปกติ | คิวงานปัจจุบัน: 1-2 วัน ✨
+            </div>
